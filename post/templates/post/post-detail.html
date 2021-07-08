@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{#{% load sidebar %}#}
+{% load sidebar %}
 
 {% block title %}{{ post.title }} :: {{ block.super }}{% endblock %}
 
@@ -167,8 +167,8 @@
                                 <input type="submit" value="Search">
                             </form>
                         </div>
-                        {# {% get_popular 3 %}#}
-                        {# {% get_tags %}#}
+                        {% get_popular 4 post.category %}
+                        {% get_tags %}
 
 
                     </div>

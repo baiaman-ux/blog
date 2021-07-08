@@ -1,4 +1,5 @@
-from django.views.generic import ListView, DeleteView
+from django.http import response
+from django.views.generic import ListView, DetailView
 from  .models import *
 
 
@@ -8,11 +9,17 @@ class HomeView(ListView):
     context_object_name = 'posts'
 
 
-class PostDetailView(DeleteView):
+class PostDetailView(DetailView):
     model = Post
     template_name = 'post/post-detail.html'
     context_object_name = 'post'
 
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        post = self.object
+        post.views = post.views + 1
+        post.save()
+        return response
 
 class PostByCategory(ListView):
     model = Post
